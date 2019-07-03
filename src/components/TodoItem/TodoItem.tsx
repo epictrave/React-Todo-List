@@ -8,9 +8,6 @@ interface Props {
 }
 interface State {}
 class TodoItem extends Component<Props, State> {
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return this.props.done !== nextProps.done;
-  }
   render() {
     const { done, children, onToggle, onRemove } = this.props;
     return (

@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import TodoItem from "../TodoItem/TodoItem";
-
-export interface Todo {
-  id: number;
-  text: string;
-  done: boolean;
-}
+import { TodoItemData } from "modules/todos";
+import { List } from "immutable";
 interface Props {
-  todos: Todo[];
+  todos: List<TodoItemData>;
   onToggle(id: number): void;
   onRemove(id: number): void;
 }
@@ -19,12 +15,12 @@ class TodoList extends Component<Props> {
 
   render() {
     const { todos, onToggle, onRemove } = this.props;
-    const todoList = todos.map(todo => (
+    const todoList = todos.map((todo, index) => (
       <TodoItem
-        key={todo.id}
-        done={todo.done}
-        onRemove={() => onRemove(todo.id)}
-        onToggle={() => onToggle(todo.id)}
+        key={todo.get("id")}
+        done={todo.get("done")}
+        onRemove={() => onRemove(index)}
+        onToggle={() => onToggle(index)}
       >
         {todo.text}
       </TodoItem>
